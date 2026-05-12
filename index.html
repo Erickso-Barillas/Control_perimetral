@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>RondaSegura PRO</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00e676">
+
+    <link rel="apple-touch-icon" href="Iconos/180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="Iconos/16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Iconos/32.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="app-wrapper">
+    <header class="app-header">
+        <div class="status-indicator">
+            <span class="dot active"></span> SISTEMA ACTIVO
+        </div>
+        <h1>RONDA<span>SEGURA</span></h1>
+    </header>
+
+    <main id="app-container" class="content">
+        <section id="dashboard">
+            <div class="date-header">
+                <h2 id="current-date">Cargando fecha...</h2>
+                <p>Resumen de Seguridad Diaria</p>
+            </div>
+
+            <div id="horarios-lista" class="rounds-container">
+                <div class="empty-state">
+                    <i data-lucide="shield-alert"></i>
+                    <p>No hay rondas generadas para hoy</p>
+                </div>
+            </div>
+
+            <button id="btnGenerar" class="btn-main">
+                <i data-lucide="refresh-cw"></i> GENERAR RONDAS ALEATORIAS
+            </button>
+        </section>
+
+        <section id="registro" class="hidden">
+            <div class="flex items-center gap-4 mb-6">
+                <button class="btn-back" onclick="showSection('dashboard')">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                <h2 id="ronda-titulo">Registro de Ronda</h2>
+            </div>
+
+            <div class="form-card">
+                <div class="input-group">
+                    <label><i data-lucide="shield-check"></i> TIPO DE PERÍMETRO</label>
+                    <select id="tipo-ronda" class="custom-select">
+                        <option value="Ronda Interna">Ronda Interna</option>
+                        <option value="Ronda Externa">Ronda Externa</option>
+                        <option value="Puntos Críticos">Puntos Críticos</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label><i data-lucide="camera"></i> EVIDENCIA FOTOGRÁFICA</label>
+                    <label for="foto-input" class="btn-capture">
+                        <i data-lucide="plus-circle"></i> AÑADIR CAPTURA
+                    </label>
+                    <input type="file" id="foto-input" accept="image/*" multiple hidden>
+                    <div id="preview-container"></div>
+                </div>
+
+                <div class="input-group">
+                    <label><i data-lucide="edit-3"></i> OBSERVACIONES TÉCNICAS</label>
+                    <textarea id="obs" placeholder="Escriba aquí las novedades encontradas..." rows="4" class="custom-textarea"></textarea>
+                </div>
+
+                <button id="btnGuardar" class="btn-finalizar">
+                    <i data-lucide="check-circle"></i> FINALIZAR
+                </button>
+            </div>
+        </section>
+
+       <section id="historial" class="hidden">
+    <div class="history-header">
+        <h2>Historial de Rondas</h2>
+        <div class="filter-container">
+            <input type="date" id="filtro-fecha">
+        </div>
+    </div>
+    <div id="lista-registros" class="historial-grid">
+        </div>
+</section>
+    </main>
+
+    <footer class="main-footer">
+        © 2026 - Ronda Segura | Autor: Ericson Barillas
+    </footer>
+
+    <nav class="bottom-nav">
+        <button onclick="showSection('dashboard')" class="nav-item active" id="nav-dash">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Inicio</span>
+        </button>
+        <button onclick="showSection('historial')" class="nav-item" id="nav-hist">
+            <i data-lucide="history"></i>
+            <span>Historial</span>
+        </button>
+    </nav>
+
+    <div id="modal-foto" class="modal hidden" onclick="cerrarModal()">
+        <span class="cerrar">&times;</span>
+        <div id="modal-content"></div>
+        <div id="caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
